@@ -1,8 +1,8 @@
 *
 !.babelrc
 !.eslintrc.json
-!.npmrc.docker
-!nginx.conf.staging
+!.npmrc
+!nginx
 !package.json
 !public
 !src

@@ -1,13 +1,14 @@
 {
-  "name": "client",
+  "name": "grandstack-kit-client",
   "version": "1.0.0",
   "description": "",
   "author": "",
   "license": "ISC",
   "scripts": {
     "build": "rm -rf dist; tsc && NODE_ENV=production yarn webpack",
-    "build:docker": "docker build -t microservices-client .",
-    "gqlgen": "graphql-codegen --config codegen.yml && eslint --ext .ts --ext .ts src/generated/graphql.tsx --fix",
+    "build:docker": "docker build -t $(jq -r '.name' package.json) .",
+    "build:profile": "rm -rf dist; PROFILE=true yarn webpack",
+    "gqlgen": "graphql-codegen --config codegen.yml && eslint --ext .ts --ext .tsx src/generated/graphql.tsx --fix",
     "prepack": "yarn build",
     "start": "yarn webpack serve"
   },
@@ -16,8 +17,8 @@
     "@apollo/react-hooks": "^4.0.0",
     "cross-fetch": "^3.0.6",
     "graphql": "^15.4.0",
+    "preact": "^10.5.9",
     "react": "^17.0.1",
-    "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
@@ -27,6 +28,7 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-react-jsx": "^7.12.12",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
@@ -45,8 +47,7 @@
     "@types/sass": "^1.16.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-graphql-tag": "^3.1.0",
-    "babel-plugin-ramda": "^2.0.0",
-    "copy-webpack-plugin": "^7.0.0",
+    "compression-webpack-plugin": "^7.1.1",
     "css-loader": "^5.0.1",
     "html-webpack-plugin": "^4.5.1",
     "react-refresh": "^0.9.0",
@@ -58,7 +59,23 @@
     "webpack": "^5.11.1",
     "webpack-bundle-analyzer": "^4.3.0",
     "webpack-cli": "^4.3.1",
-    "webpack-dev-server": "^3.11.1",
-    "webpack-node-externals": "^2.5.2"
+    "webpack-dev-server": "^3.11.1"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

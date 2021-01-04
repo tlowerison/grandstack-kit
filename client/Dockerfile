@@ -2,7 +2,7 @@ FROM node:12-alpine AS BUILD_IMAGE
 
   WORKDIR /usr/src/app
 
-  COPY .npmrc.docker .npmrc
+  # COPY .npmrc .npmrc
   COPY package.json yarn.lock ./
   RUN yarn
   COPY .babelrc tsconfig.json webpack.config.js ./
@@ -13,4 +13,4 @@ FROM node:12-alpine AS BUILD_IMAGE
 FROM nginx:1.17-alpine
 
   COPY --from=BUILD_IMAGE /usr/src/app/dist /usr/share/nginx/html
-  RUN echo $(sed -e '2a\'$'\napplication/wasm wasm;' /etc/nginx/mime.types) > /etc/nginx/mime.types
+  COPY nginx /etc/nginx

@@ -1,14 +1,15 @@
-// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const CopyPlugin = require("copy-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const CompressionPlugin = require("compression-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const reactRefresh = require("react-refresh/babel");
 const path = require("path");
 const pkg = require("./package.json");
+const reactRefresh = require("react-refresh/babel");
 const webpack = require("webpack");
 
 const isDevelopment = process.env.NODE_ENV !== "production";
+const shouldProfile = process.env.PROFILE === "true";
 
 module.exports = {
   devServer: {
@@ -20,9 +21,9 @@ module.exports = {
       "/graphql": "http://localhost:8080",
     },
   },
-  devtool: "source-map",
+  devtool: isDevelopment ? "source-map" : false,
   entry: "./src/index.tsx",
-  mode: isDevelopment ? "development" : "production",
+  mode: "production",
   module: {
     rules: [
       {
@@ -66,15 +67,8 @@ module.exports = {
     umdNamedDefine: true,
   },
   plugins: [
-    // new BundleAnalyzerPlugin(),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "node_modules/@tlowerison/react-d3-graph/dist/jq.wasm.wasm",
-          to: ".",
-        },
-      ],
-    }),
+    shouldProfile && new BundleAnalyzerPlugin(),
+    new CompressionPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve("./public/index.html"),
     }),
@@ -82,6 +76,11 @@ module.exports = {
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
   resolve: {
+    alias: {
+      "react": "preact/compat",
+      "react-dom/test-utils": "preact/test-utils",
+      "react-dom": "preact/compat",
+    },
     extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
     modules: [path.resolve(__dirname, "src"), "node_modules"],
   },

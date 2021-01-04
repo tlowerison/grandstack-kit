@@ -1,15 +1,21 @@
 {
   "presets": [
-    "@babel/preset-env",
+    ["@babel/preset-env", {
+      "useBuiltIns": "entry",
+      "corejs": "3.6",
+    }],
     "@babel/preset-react",
     "@babel/preset-typescript",
   ],
   "plugins": [
+    ["@babel/plugin-transform-react-jsx", {
+      "pragma": "h",
+      "pragmaFrag": "Fragment",
+    }],
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-syntax-dynamic-import",
     "babel-plugin-graphql-tag",
-    "ramda",
 	],
   "ignore": [
     "**/*.d.ts",
