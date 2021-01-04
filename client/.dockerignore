@@ -1,0 +1,11 @@
+*
+!.babelrc
+!.eslintrc.json
+!.npmrc.docker
+!nginx.conf.staging
+!package.json
+!public
+!src
+!tsconfig.json
+!webpack.config.js
+!yarn.lock
