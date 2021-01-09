@@ -1,0 +1,17 @@
+enum Role {
+  ADMIN
+  SERVER
+  USER
+}
+
+enum Scope {
+  WRITE_ME
+  DELETE_ME
+}
+
+type User @user {
+  uuid: ID! @id
+  email: String @me
+  username: String!
+  password: String @admin
+}

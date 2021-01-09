@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grandstack-kit-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+    - hosts:
+      - grandstack-kit.com
+      - "*.grandstack-kit.com"
+      secretName: grandstack-kit-tls
+  rules:
+    - host: grandstack-kit.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grandstack-kit-prod-client
+                port:
+                  number: 3000
+          - path: /graphql
+            pathType: Exact
+            backend:
+              service:
+                name: grandstack-kit-prod-server
+                port:
+                  number: 4000
+          - path: /api
+            pathType: Exact
+            backend:
+              service:
+                name: grandstack-kit-prod-api
+                port:
+                  number: 8080

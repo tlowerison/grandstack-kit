@@ -1,0 +1,117 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grandstack-kit-prod-api
+  labels:
+    app: grandstack-kit
+    environment: prod
+    component: api
+    tier: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: grandstack-kit
+    environment: prod
+    component: api
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grandstack-kit-prod-api-config
+data:
+  graphql-path: /api
+  neo4j-host: graphdb-neo4j.default.svc.cluster.local
+  neo4j-port: "7687"
+  neo4j-protocol: bolt
+  node-env: production
+  port: "8080"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grandstack-kit-prod-api
+  labels:
+    app: grandstack-kit
+    environment: prod
+    component: api
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grandstack-kit
+      environment: prod
+      component: api
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: grandstack-kit
+        environment: prod
+        component: api
+        tier: backend
+    spec:
+      containers:
+        - name: grandstack-kit-api
+          image: registry.digitalocean.com/grandstack-kit/api:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: API_KEY_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grandstack-kit-prod-secrets
+                  key: api-key-secret
+            - name: GRAPHQL_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-api-config
+                  key: graphql-path
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grandstack-kit-prod-secrets
+                  key: jwt-secret
+            - name: NEO4J_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-api-config
+                  key: neo4j-host
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: graphdb-neo4j-secrets
+                  key: neo4j-password
+            - name: NEO4J_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-api-config
+                  key: neo4j-port
+            - name: NEO4J_PROTOCOL
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-api-config
+                  key: neo4j-protocol
+            - name: NEO4J_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: grandstack-kit-prod-secrets
+                  key: neo4j-username
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-api-config
+                  key: node-env
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-api-config
+                  key: port
+      imagePullSecrets:
+        - name: regcred

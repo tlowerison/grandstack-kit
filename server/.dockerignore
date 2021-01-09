@@ -1,11 +1,8 @@
 *
 !.babelrc
-!.eslintrc.json
 !.npmrc.docker
 !dependencies.json
-!nginx
 !package.json
-!public
 !src
 !tsconfig.json
 !webpack.config.js

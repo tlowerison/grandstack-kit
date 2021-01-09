@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 import fetch from "cross-fetch";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
@@ -15,9 +15,9 @@ export const client = new ApolloClient({
 });
 
 const root = document.getElementById("root");
-root && ReactDOM.render( // @ts-ignore
+root && ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
-  </ApolloProvider>,
+  </ApolloProvider> as ReactElement,
   root,
 );

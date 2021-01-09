@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grandstack-kit-prod-redis
+  labels:
+    app: grandstack-kit
+    environment: prod
+    component: redis
+    tier: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: grandstack-kit
+    environment: prod
+    component: redis
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grandstack-kit-prod-redis-config
+data:
+  maxmemory: 2mb
+  maxmemory-policy: allkeys-lru
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grandstack-kit-prod-redis
+  labels:
+    app: grandstack-kit
+    environment: prod
+    component: redis
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grandstack-kit
+      environment: prod
+      component: redis
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: grandstack-kit
+        environment: prod
+        component: redis
+        tier: backend
+    spec:
+      containers:
+        - name: redis
+          image: redis:6.0.9
+          ports:
+            - containerPort: 6379
+          env:
+            - name: MAXMEMORY
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-redis-config
+                  key: maxmemory
+            - name: MAXMEMORY_POLICY
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-redis-config
+                  key: maxmemory-policy
+          command:
+            - redis-server
+          args:
+            - --maxmemory
+            - $(MAXMEMORY)
+            - --maxmemory-policy
+            - $(MAXMEMORY_POLICY)
+          resources:
+            limits:
+              cpu: "0.1"
+          volumeMounts:
+            - mountPath: /redis-master-data
+              name: data
+      volumes:
+        - name: data
+          emptyDir: {}

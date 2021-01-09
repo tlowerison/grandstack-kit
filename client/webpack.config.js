@@ -16,14 +16,14 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     hot: true,
-    port: 3000,
+    port: 4000,
     proxy: {
-      "/graphql": "http://localhost:8080",
+      "/graphql": "http://localhost:7070",
     },
   },
   devtool: isDevelopment ? "source-map" : false,
   entry: "./src/index.tsx",
-  mode: "production",
+  mode: isDevelopment ? "development" : "production",
   module: {
     rules: [
       {

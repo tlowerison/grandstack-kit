@@ -17,6 +17,7 @@
   },
   "plugins": [
     "react",
+    "react-hooks",
     "@typescript-eslint"
   ],
   "rules": {
@@ -28,6 +29,10 @@
     "linebreak-style": [
       "error",
       "unix"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      { "max": 2 }
     ],
     "quotes": [
       "error",

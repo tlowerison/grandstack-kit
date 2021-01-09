@@ -1,0 +1,130 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grandstack-kit-prod-server
+  labels:
+    app: grandstack-kit
+    environment: prod
+    component: server
+    tier: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: grandstack-kit
+    environment: prod
+    component: server
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grandstack-kit-prod-server-config
+data:
+  api-host: grandstack-kit-prod-api.default.svc.cluster.local
+  api-port: "8080"
+  api-protocol: http
+  domain: granstack-kit.com
+  graphql-path: /graphql
+  node-env: production
+  port: "4000"
+  redis-host: grandstack-kit-prod-redis.default.svc.cluster.local
+  redis-port: "6379"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grandstack-kit-prod-server
+  labels:
+    app: grandstack-kit
+    environment: prod
+    component: server
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grandstack-kit
+      environment: prod
+      component: server
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: grandstack-kit
+        environment: prod
+        component: server
+        tier: backend
+    spec:
+      containers:
+        - name: grandstack-kit-server
+          image: registry.digitalocean.com/grandstack-kit/server:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
+          env:
+            - name: API_GRAPHQL_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-api-config
+                  key: graphql-path
+            - name: API_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: api-host
+            - name: API_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: api-port
+            - name: API_PROTOCOL
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: api-protocol
+            - name: DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: domain
+            - name: GRAPHQL_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: graphql-path
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grandstack-kit-prod-secrets
+                  key: jwt-secret
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: node-env
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: port
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: redis-host
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-server-config
+                  key: redis-port
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grandstack-kit-prod-secrets
+                  key: session-secret
+      imagePullSecrets:
+        - name: regcred

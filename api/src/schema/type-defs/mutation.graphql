@@ -1,0 +1,60 @@
+type Mutation {
+  CreateUser(email: String!, password: String!, username: String!, roles: [Role!]!): User
+    @admin
+    @email
+    @username
+    @password
+    @uniqueEmailUsername
+    @cypher(statement: """
+      CREATE (user:User {
+        uuid: apoc.create.uuid(),
+        email: $email,
+        password: $password,
+        roles: $roles,
+        username: $username
+      })
+      RETURN user
+    """)
+
+  DeleteMe: Boolean
+    @user
+    @deleteMe
+    @server
+    @cypher(statement: "DETACH DELETE me RETURN TRUE")
+
+  # Compare passwords in explicit resolver
+  SignIn(email: String, username: String, password: String!): User
+    @server
+
+  SignOut: Boolean
+    @server
+
+  SignUp(email: String!, username: String!, password: String!): User
+    @server
+    @email
+    @username
+    @password
+    @uniqueEmailUsername
+    @cypher(statement: """
+      CREATE (user:User {
+        uuid: apoc.create.uuid(),
+        email: $email,
+        password: $password,
+        roles: ['USER'],
+        username: $username
+      })
+      RETURN user
+    """)
+
+  UpdateMe(username: String, email: String): Boolean
+    @user
+    @writeMe
+    @email
+    @username
+    @uniqueEmailUsername
+    @cypher(statement: """
+      SET me.username = CASE WHEN $username IS NOT NULL THEN $username ELSE me.username END
+      SET me.email = CASE WHEN $email IS NOT NULL THEN $email ELSE me.email END
+      RETURN TRUE
+    """)
+}

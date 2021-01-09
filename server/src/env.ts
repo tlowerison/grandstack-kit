@@ -1,0 +1,30 @@
+import { parseEnv } from "utils";
+
+export const {
+  API_GRAPHQL_PATH = "/graphql",
+  API_HOST,
+  API_PORT,
+  API_PROTOCOL,
+  CLIENT_PORT,
+  DOMAIN,
+  GRAPHQL_PATH = "/graphql",
+  JWT_SECRET,
+  NODE_ENV,
+  PORT,
+  REDIS_HOST,
+  REDIS_PORT,
+  SESSION_SECRET,
+} = parseEnv({
+  API_GRAPHQL_PATH: "?string",
+  API_HOST: "string",
+  API_PORT: "positiveInt",
+  API_PROTOCOL: "string",
+  CLIENT_PORT: "?positiveInt",
+  DOMAIN: "?domain",
+  GRAPHQL_PATH: "?string",
+  JWT_SECRET: "string",
+  PORT: "positiveInt",
+  REDIS_HOST: "string",
+  REDIS_PORT: "positiveInt",
+  SESSION_SECRET: "string",
+});
