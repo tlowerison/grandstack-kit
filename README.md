@@ -32,7 +32,7 @@ The basic architecture works as follows:
     - Direct link to Neo4J database
     - External facing due to decoupling from server
   - [Eat your own dogfood](https://en.wikipedia.org/wiki/Eating_your_own_dog_food):
-    - Server uses a direct (internal link to the) api so that your platform is held accountable to providing the same capabilities to your API users as your website
+    - Server depends directly on the api so that your platform is held accountable to providing the same capabilities to your API users as your website
 
 ##### Installation
 ```
