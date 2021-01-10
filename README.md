@@ -1,4 +1,4 @@
-### GRAND Stack Kit
+# GRAND Stack Kit
 This is a full stack boilerplate currently in development!
 It's stack is a little more nuanced than standard GRAND so here's a list of all the technologies used:
 - [GraphQL](https://graphql.org)
@@ -34,7 +34,7 @@ The basic architecture works as follows:
   - [Eat your own dogfood](https://en.wikipedia.org/wiki/Eating_your_own_dog_food):
     - Server depends directly on the api so that your platform is held accountable to providing the same capabilities to your API users as your website
 
-##### Installation
+### Installation
 ```
 git clone https://github.com/tlowerison/grandstack-kit.git
 cd grandstack-kit

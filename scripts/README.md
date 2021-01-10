@@ -1,4 +1,4 @@
-### Docker Image Scripts
+## Docker Image Scripts
 
 A set of scripts which make your package.json the source of truth for Docker image tags. To use, make these scripts executable by `cd`ing into this directory and running
 ```

@@ -1,4 +1,4 @@
-### API
+## API
 Make sure to add a .env file in this directory that has these environemnt variables
 ```
 API_KEY_SECRET='a-lot-of-random-letters-and-numbers-here'

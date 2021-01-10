@@ -1,4 +1,4 @@
-### Server
+## Server
 Make sure to add a .env file in this directory that has these environemnt variables
 ```
 API_GRAPHQL_PATH=/api
