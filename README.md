@@ -7,7 +7,7 @@ It's stack is a little more nuanced than standard GRAND so here's a list of all 
 - [NodeJS](https://nodejs.org)
 - [TypeScript](https://www.typescriptlang.org) - used in frontend and backends
 - [Neo4j](https://neo4j.com)
-- [@tlowerison/neo4j-graphql-js](https://github.com/tlowerison/neo4j-graphql-js) - a fork of neo4j-graphql-js which provides dynamic authorization capabilities
+- [@tlowerison/neo4j-graphql-js](https://www.npmjs.com/package/@tlowerison/neo4j-graphql-js) - a fork of neo4j-graphql-js which provides dynamic authorization capabilities
 - [Kubernetes](https://kubernetes.io)
 - [Docker](https://www.docker.com) - use [Docker Desktop](https://www.docker.com/products/docker-desktop) for building images locally
 - [Redis](https://docs.redislabs.com/latest/rs/references/client_references/client_nodejs)
