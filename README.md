@@ -43,3 +43,4 @@ E.g.
 ```
 bash grandstack-kit/install.sh grandstack-kit domain.com grandstackkit
 ```
+Installation takes several minutes (three separate `yarn && yarn build`s), go watch some paint dry in the mean time.
