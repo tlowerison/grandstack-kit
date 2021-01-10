@@ -37,10 +37,9 @@ The basic architecture works as follows:
 ### Installation
 ```
 git clone https://github.com/tlowerison/grandstack-kit.git
-cd grandstack-kit
-bash install.sh <project-name> <website-domain> [image-repository]
+bash grandstack-kit/install.sh <project-name> <website-domain> [image-repository]
 ```
 E.g.
 ```
-bash install.sh grandstack-kit domain.com grandstackkit
+bash grandstack-kit/install.sh grandstack-kit domain.com grandstackkit
 ```
