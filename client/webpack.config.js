@@ -16,7 +16,7 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     hot: true,
-    port: 4000,
+    port: 3000,
     proxy: {
       "/graphql": "http://localhost:7070",
     },

@@ -2,13 +2,13 @@
   "name": "@grandstack-kit/api",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "./dist/main.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "rm -rf dist; tsc && NODE_ENV=production yarn webpack",
     "build:profile": "rm -rf dist; NODE_ENV=production PROFILE=true yarn webpack",
     "gqlgen": "yarn build && rm db/schema.graphql; IS_GRAPHQL_BUILD=true node ./dist/main.js && cd ../client && yarn gqlgen && cd ../server",
     "prepack": "yarn build",
-    "start": "node ./dist/main.js",
+    "start": "(! (ls dist/main.js >> /dev/null 2>&1) && yarn build); node ./dist/main.js",
     "build:image": "SCRIPTS=\"$(cd $PWD && cd .. && echo \"$PWD/scripts\")\" && $SCRIPTS/build-image.sh",
     "publish:image": "SCRIPTS=\"$(cd $PWD && cd .. && echo \"$PWD/scripts\")\" && $SCRIPTS/publish-image.sh",
     "start:image": "SCRIPTS=\"$(cd $PWD && cd .. && echo \"$PWD/scripts\")\" && $SCRIPTS/start-image.sh"

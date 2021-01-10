@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
         - name: grandstack-kit-api
-          image: registry.digitalocean.com/grandstack-kit/api:1.0.0
+          image: grandstackkit/api:1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

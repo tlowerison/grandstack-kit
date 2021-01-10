@@ -8,11 +8,11 @@ metadata:
 spec:
   tls:
     - hosts:
-      - grandstack-kit.com
-      - "*.grandstack-kit.com"
+      - domain.com
+      - "*.domain.com"
       secretName: grandstack-kit-tls
   rules:
-    - host: grandstack-kit.com
+    - host: domain.com
       http:
         paths:
           - path: /

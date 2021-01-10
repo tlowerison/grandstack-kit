@@ -16,8 +16,8 @@ spec:
     tier: backend
   ports:
     - protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 7070
+      targetPort: 7070
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -27,7 +27,7 @@ data:
   api-host: grandstack-kit-prod-api.default.svc.cluster.local
   api-port: "8080"
   api-protocol: http
-  domain: granstack-kit.com
+  domain: domain.com
   graphql-path: /graphql
   node-env: production
   port: "4000"
@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - name: grandstack-kit-server
-          image: registry.digitalocean.com/grandstack-kit/server:1.0.0
+          image: grandstackkit/server:1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 4000

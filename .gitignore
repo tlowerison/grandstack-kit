@@ -1,0 +1,19 @@
+# dependencies
+**/node_modules
+
+# misc
+**/.DS_Store
+**/*.env*
+**/*.npmignore*
+**/*.npmrc*
+**/*.yalc*
+**/*.yalcignore*
+**/*.yarnrc*
+**/dependencies.json
+**/dist
+**/npm-debug.log*
+**/redis-stable
+**/*stats.json
+**/yalc.lock
+**/yarn-debug.log*
+**/yarn-error.log*

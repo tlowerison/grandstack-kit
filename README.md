@@ -19,9 +19,9 @@ It's stack is a little more nuanced than standard GRAND so here's a list of all 
 
 The basic architecture works as follows:
 - Kubernetes/nginx routes traffic to different services based on path
-  - (Prefix): grandstack-kit.com/ -> client
-  - (Exact): grandstack-kit.com/graphql -> server
-  - (Exact): grandstack-kit.com/api -> api
+  - (Prefix): domain.com/ -> client
+  - (Exact): domain.com/graphql -> server
+  - (Exact): domain.com/api -> api
 - The api and the server are separated into different services primarily for separation of interests
   - Server:
     - cookie based session management (uses Redis)
@@ -38,17 +38,9 @@ The basic architecture works as follows:
 ```
 git clone https://github.com/tlowerison/grandstack-kit.git
 cd grandstack-kit
-rm -rf .git && git init
-cd scripts
-chmod u+x build-image.sh
-chmod u+x publish-image.sh
-chmod u+x start-image.sh
-chmod u+x yield-image.sh
-cd ..
-cd server
-wget http://download.redis.io/redis-stable.tar.gz
-tar xvzf redis-stable.tar.gz
-cd redis-stable
-make
-cd ../..
+bash install.sh <project-name> <website-domain> [image-repository]
+```
+E.g.
+```
+bash install.sh grandstack-kit domain.com grandstackkit
 ```

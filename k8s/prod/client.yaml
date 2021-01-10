@@ -16,8 +16,8 @@ spec:
     tier: frontend
   ports:
     - protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 3000
+      targetPort: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,10 +46,10 @@ spec:
     spec:
       containers:
         - name: grandstack-kit-client
-          image: registry.digitalocean.com/grandstack-kit/client:1.0.0
+          image: grandstackkit/client:1.0.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 4000
+            - containerPort: 3000
           lifecycle:
             preStop:
               exec:
