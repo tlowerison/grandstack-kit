@@ -33,7 +33,7 @@ cd client && yarn && yarn build && cd ..
 cd server && yarn && yarn build && cd ..
 
 cd server
-wget -O http://download.redis.io/redis-stable.tar.gz
+wget http://download.redis.io/redis-stable.tar.gz
 tar xvzf redis-stable.tar.gz
 cd redis-stable
 make
