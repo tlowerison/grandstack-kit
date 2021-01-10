@@ -18,19 +18,19 @@ if [ "$3" != "" ]; then
   grep -rfl 'grandstackkit' k8s/ | xargs sed -i 's/registry.digitalocean.com/grandstack-kit/$3/g'
 fi
 
-grep -rl 'grandstack-kit' api/ | xargs sed -i "" "s/grandstack-kit/$1/g"
-grep -rl 'grandstack-kit' client/ | xargs sed -i "" "s/grandstack-kit/$1/g"
-grep -rl 'grandstack-kit' k8s/ | xargs sed -i "" "s/grandstack-kit/$1/g"
-grep -rl 'grandstack-kit' server/ | xargs sed -i "" "s/grandstack-kit/$1/g"
+grep -R --exclude-dir=node_modules -rl 'grandstack-kit' api/ | xargs sed -i "" "s/grandstack-kit/$1/g"
+grep -R --exclude-dir=node_modules -rl 'grandstack-kit' client/ | xargs sed -i "" "s/grandstack-kit/$1/g"
+grep -R --exclude-dir=node_modules -rl 'grandstack-kit' k8s/ | xargs sed -i "" "s/grandstack-kit/$1/g"
+grep -R --exclude-dir=node_modules -rl 'grandstack-kit' server/ | xargs sed -i "" "s/grandstack-kit/$1/g"
 
-grep -rl 'domain.com' api/ | xargs sed -i "" "s/domain.com/$2/g"
-grep -rl 'domain.com' client/ | xargs sed -i "" "s/domain.com/$2/g"
-grep -rl 'domain.com' k8s/ | xargs sed -i "" "s/domain.com/$2/g"
-grep -rl 'domain.com' server/ | xargs sed -i "" "s/domain.com/$2/g"
+grep -R --exclude-dir=node_modules -rl 'domain.com' api/ | xargs sed -i "" "s/domain.com/$2/g"
+grep -R --exclude-dir=node_modules -rl 'domain.com' client/ | xargs sed -i "" "s/domain.com/$2/g"
+grep -R --exclude-dir=node_modules -rl 'domain.com' k8s/ | xargs sed -i "" "s/domain.com/$2/g"
+grep -R --exclude-dir=node_modules -rl 'domain.com' server/ | xargs sed -i "" "s/domain.com/$2/g"
 
-cd api && yarn && yarn build && cd ..
-cd client && yarn && yarn build && cd ..
-cd server && yarn && yarn build && cd ..
+(cd api && yarn && yarn build && cd ..)
+(cd client && yarn && yarn build && cd ..)
+(cd server && yarn && yarn build && cd ..)
 
 cd server
 wget http://download.redis.io/redis-stable.tar.gz
