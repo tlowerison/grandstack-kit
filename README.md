@@ -35,11 +35,11 @@ The basic architecture works as follows:
 ### Installation
 ```
 git clone https://github.com/tlowerison/grandstack-kit.git
-bash grandstack-kit/install.sh <project-name> <website-domain> [image-repository]
+bash grandstack-kit/install.sh [-p PROJECT_NAME] [-d DOMAIN] [-i IMAGE_REPO]
 ```
 E.g.
 ```
-bash grandstack-kit/install.sh grandstack-kit domain.com grandstackkit
+bash grandstack-kit/install.sh -p my-cool-project -d mydomain.com -i myimagerepo
 ```
 Installation includes three separate instances of `yarn && yarn build` so if you like watching paint dry feel free to watch, otherwise here are some sweet time-burners
 - https://tixy.land/
