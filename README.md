@@ -22,7 +22,7 @@ The basic architecture works as follows:
   - (Prefix): domain.com/ -> client
   - (Exact): domain.com/graphql -> server
   - (Exact): domain.com/api -> api
-- The api and the server are separated into different services primarily for separation of interests
+- The api and the server are separated into different services that way we [eat our own dogfood](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) (also, great read about it https://gist.github.com/chitchcock/1281611):
   - Server:
     - cookie based session management (uses Redis)
     - domain filtering
@@ -31,8 +31,6 @@ The basic architecture works as follows:
     - JWT authorization
     - Direct link to Neo4J database
     - External facing due to decoupling from server
-  - [Eat your own dogfood](https://en.wikipedia.org/wiki/Eating_your_own_dog_food):
-    - Server depends directly on the api so that your platform is held accountable to providing the same capabilities to your API users as your website
 
 ### Installation
 ```

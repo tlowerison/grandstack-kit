@@ -1,5 +1,5 @@
 {
-  "name": "@grandstack-kit/server",
+  "name": "grandstack-kit-server",
   "version": "1.0.0",
   "license": "MIT",
   "main": "./dist/main.js",
