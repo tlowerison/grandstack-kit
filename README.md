@@ -12,7 +12,7 @@ This is a [GRAND Stack](https://grandstack.io/) boilerplate currently in develop
 - [nginx](https://www.nginx.com)
 - (optional) [cygoose](https://github.com/tlowerison/cygoose/) - a Neo4j database migration tool
 - Your pick of a Kubernetes Cloud Provider
-  - I personally use [Digital Ocean](https://www.digitalocean.com). It provides Kubernetes clusters as well as private image repositories for pretty reasonable prices, plus they have plenty of in-depth walkthroughs which I leaned on heavily while making this
+  - I personally use [Digital Ocean](https://www.digitalocean.com), they provide Kubernetes clusters as well as private image repositories for pretty reasonable prices. They also have plenty of in-depth walkthroughs which I leaned on heavily while making this
 
 The basic architecture works as follows:
 - Kubernetes/nginx routes traffic to different services based on path
