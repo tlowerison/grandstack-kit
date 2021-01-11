@@ -96,7 +96,7 @@ if [ ! -d "server/redis-stable" ]; then
   wget http://download.redis.io/redis-stable.tar.gz
   tar xvzf redis-stable.tar.gz
   cd redis-stable
-  make && make test
+  make
   cd ..
   rm redis-stable.tar.gz
   cd ..
