@@ -1,5 +1,5 @@
 # GRAND Stack Kit
-This is a full stack boilerplate currently in development!
+This is a GRAND Stack boilerplate currently in development!
 It's stack is a little more nuanced than standard GRAND so here's a list of all the technologies used:
 - [GraphQL](https://graphql.org)
 - [Preact](https://preactjs.com) - a faster, lighter version of React; with [preact/compat](https://preactjs.com/guide/v10/switching-to-preact) your source code still refers to regular old React
