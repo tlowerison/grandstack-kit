@@ -22,17 +22,17 @@ spec:
                 name: grandstack-kit-prod-client
                 port:
                   number: 3000
-          - path: /graphql
-            pathType: Exact
-            backend:
-              service:
-                name: grandstack-kit-prod-server
-                port:
-                  number: 4000
           - path: /api
             pathType: Exact
             backend:
               service:
                 name: grandstack-kit-prod-api
                 port:
-                  number: 8080
+                  number: 5050
+          - path: /graphql
+            pathType: Exact
+            backend:
+              service:
+                name: grandstack-kit-prod-server
+                port:
+                  number: 7070

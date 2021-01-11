@@ -3,7 +3,7 @@ Make sure to add a .env file in this directory that has these environemnt variab
 ```
 API_GRAPHQL_PATH=/api
 API_HOST=localhost
-API_PORT=8080
+API_PORT=5050
 API_PROTOCOL=http
 CLIENT_PORT=3000
 DOMAIN=domain.com

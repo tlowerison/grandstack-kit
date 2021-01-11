@@ -25,7 +25,7 @@ metadata:
   name: grandstack-kit-prod-server-config
 data:
   api-host: grandstack-kit-prod-api.default.svc.cluster.local
-  api-port: "8080"
+  api-port: "5050"
   api-protocol: http
   domain: domain.com
   graphql-path: /graphql

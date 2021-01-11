@@ -16,8 +16,8 @@ spec:
     tier: backend
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 5050
+      targetPort: 5050
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -29,7 +29,7 @@ data:
   neo4j-port: "7687"
   neo4j-protocol: bolt
   node-env: production
-  port: "8080"
+  port: "5050"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -61,7 +61,7 @@ spec:
           image: grandstackkit/api:1.0.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 5050
           env:
             - name: API_KEY_SECRET
               valueFrom:
