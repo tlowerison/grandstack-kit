@@ -19,7 +19,7 @@ The basic architecture works as follows:
   - (Prefix): domain.com/ -> client
   - (Exact): domain.com/graphql -> server
   - (Exact): domain.com/api -> api
-- The api and the server are separated into different services that way we [eat our own dogfood](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) (also, great read about it https://gist.github.com/chitchcock/1281611):
+- The api and the server are separated into different services that way we [eat our own dogfood](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) (here's a great read for more about that https://gist.github.com/chitchcock/1281611):
   - Server:
     - cookie based session management
     - domain filtering
