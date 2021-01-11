@@ -2,32 +2,32 @@
 
 DIR=$(dirname "$BASH_SOURCE")
 cd "$DIR"
-PROJECT_NAME=$(basename "$PWD")
-DOMAIN_LINE=$(grep "DOMAIN=" server/README.md)
+PREV_PROJECT_NAME=$(basename "$PWD")
+DOMAIN_LINE=$(grep "PREV_DOMAIN=" server/README.md)
 IFS="=" read -r -a DOMAIN_ARRAY <<< "$DOMAIN_LINE"
-DOMAIN=${DOMAIN_ARRAY[1]}
+PREV_DOMAIN=${DOMAIN_ARRAY[1]}
 
-NEW_PROJECT_NAME="$PROJECT_NAME"
-NEW_DOMAIN="$DOMAIN"
-NEW_IMAGE_REPO=""
+PROJECT_NAME="$PREV_PROJECT_NAME"
+DOMAIN="$PREV_DOMAIN"
+IMAGE_REPO=""
 
 while test $# -gt 0; do
   case "$1" in
     -h|--help)
       echo "grandstack-kit/install.sh [options]"
-      echo "  -p, --project-name PROJECT_NAME     find and replace all instances of 'grandstack-kit' with PROJECT_NAME"
+      echo "  -p, --project-name PROJECT_NAME     find and replace all instances of 'grandstack-kit' with PREV_PROJECT_NAME"
       echo "                                          if the current project-name is 'grandstack-kit' and a different"
       echo "                                          project-name is provided, will reset git tracking"
       echo ""
-      echo "  -d, --domain DOMAIN                 find and replace all instances of 'grandstack-kit.com' with DOMAIN"
+      echo "  -d, --domain DOMAIN                 find and replace all instances of 'grandstack-kit.com' with PREV_DOMAIN"
       echo ""
-      echo "  -i, --image-repo IMAGE_REPO         find and replace all instances of 'grandstackkit' with IMAGE_REPO"
+      echo "  -i, --image-repo IMAGE_REPO         find and replace all instances of 'grandstackkit' with PREV_IMAGE_REPO"
       exit 0
       ;;
     -p|--project-name)
       shift
       if test $# -gt 0; then
-        NEW_PROJECT_NAME="$1"
+        PROJECT_NAME="$1"
         shift
       else
         echo "error: no project-name specified"
@@ -37,7 +37,7 @@ while test $# -gt 0; do
     -d|--domain)
       shift
       if test $# -gt 0; then
-        NEW_DOMAIN="$1"
+        DOMAIN="$1"
         shift
       else
         echo "error: no domain specified"
@@ -47,7 +47,7 @@ while test $# -gt 0; do
     -i|--image-repo)
       shift
       if test $# -gt 0; then
-        NEW_IMAGE_REPO="$1"
+        IMAGE_REPO="$1"
         shift
       else
         echo "error: no image-repo specified"
@@ -57,32 +57,32 @@ while test $# -gt 0; do
   esac
 done
 
-if [ "$PROJECT_NAME" = "grandstack-kit" ] && [ "$NEW_PROJECT_NAME" != "grandstack-kit" ]; then
-  mv -i .git ~/.Trash/.git < /dev/null
+if [ "$PREV_PROJECT_NAME" = "grandstack-kit" ] && [ "$PROJECT_NAME" != "grandstack-kit" ]; then
+  rm -rf .git
 fi
 
-if [ "$NEW_PROJECT_NAME" != "$PROJECT_NAME" ]; then
+if [ "$PROJECT_NAME" != "$PREV_PROJECT_NAME" ]; then
   cd ..
-  mv {$PROJECT_NAME,$NEW_PROJECT_NAME}
-  cd "$NEW_PROJECT_NAME"
+  mv {$PREV_PROJECT_NAME,$PROJECT_NAME}
+  cd "$PROJECT_NAME"
 fi
 
-if [ "$NEW_DOMAIN" != "$DOMAIN" ]; then
-  grep -R --exclude-dir=node_modules -rl "$DOMAIN" api/ | LC_ALL=C xargs sed -i "" "s/$DOMAIN/$NEW_DOMAIN/g"
-  grep -R --exclude-dir=node_modules -rl "$DOMAIN" client/ | LC_ALL=C xargs sed -i "" "s/$DOMAIN/$NEW_DOMAIN/g"
-  grep -R --exclude-dir=node_modules -rl "$DOMAIN" k8s/ | LC_ALL=C xargs sed -i "" "s/$DOMAIN/$NEW_DOMAIN/g"
-  grep -R --exclude-dir=node_modules -rl "$DOMAIN" server/ | LC_ALL=C xargs sed -i "" "s/$DOMAIN/$NEW_DOMAIN/g"
+if [ "$DOMAIN" != "$PREV_DOMAIN" ]; then
+  grep -R --exclude-dir=node_modules -rl "$PREV_DOMAIN" api/ | LC_ALL=C xargs sed -i "" "s/$PREV_DOMAIN/$DOMAIN/g"
+  grep -R --exclude-dir=node_modules -rl "$PREV_DOMAIN" client/ | LC_ALL=C xargs sed -i "" "s/$PREV_DOMAIN/$DOMAIN/g"
+  grep -R --exclude-dir=node_modules -rl "$PREV_DOMAIN" k8s/ | LC_ALL=C xargs sed -i "" "s/$PREV_DOMAIN/$DOMAIN/g"
+  grep -R --exclude-dir=node_modules -rl "$PREV_DOMAIN" server/ | LC_ALL=C xargs sed -i "" "s/$PREV_DOMAIN/$DOMAIN/g"
 fi
 
-if [ "$NEW_IMAGE_REPO" != "" ]; then
-  grep -R -rl "grandstackkit" k8s/ | LC_ALL=C xargs sed -i "" "s/grandstackkit/$NEW_IMAGE_REPO/g"
+if [ "$IMAGE_REPO" != "" ]; then
+  grep -R -rl "grandstackkit" k8s/ | LC_ALL=C xargs sed -i "" "s/grandstackkit/$IMAGE_REPO/g"
 fi
 
-if [ "$NEW_PROJECT_NAME" != "$PROJECT_NAME" ]; then
-  grep -R --exclude-dir=node_modules -rl "$PROJECT_NAME" api/ | LC_ALL=C  xargs sed -i "" "s/$PROJECT_NAME/$NEW_PROJECT_NAME/g"
-  grep -R --exclude-dir=node_modules -rl "$PROJECT_NAME" client/ | LC_ALL=C xargs sed -i "" "s/$PROJECT_NAME/$NEW_PROJECT_NAME/g"
-  grep -R --exclude-dir=node_modules -rl "$PROJECT_NAME" k8s/ | LC_ALL=C xargs sed -i "" "s/$PROJECT_NAME/$NEW_PROJECT_NAME/g"
-  grep -R --exclude-dir=node_modules -rl "$PROJECT_NAME" server/ | LC_ALL=C xargs sed -i "" "s/$PROJECT_NAME/$NEW_PROJECT_NAME/g"
+if [ "$PROJECT_NAME" != "$PREV_PROJECT_NAME" ]; then
+  grep -R --exclude-dir=node_modules -rl "$PREV_PROJECT_NAME" api/ | LC_ALL=C  xargs sed -i "" "s/$PREV_PROJECT_NAME/$PROJECT_NAME/g"
+  grep -R --exclude-dir=node_modules -rl "$PREV_PROJECT_NAME" client/ | LC_ALL=C xargs sed -i "" "s/$PREV_PROJECT_NAME/$PROJECT_NAME/g"
+  grep -R --exclude-dir=node_modules -rl "$PREV_PROJECT_NAME" k8s/ | LC_ALL=C xargs sed -i "" "s/$PREV_PROJECT_NAME/$PROJECT_NAME/g"
+  grep -R --exclude-dir=node_modules -rl "$PREV_PROJECT_NAME" server/ | LC_ALL=C xargs sed -i "" "s/$PREV_PROJECT_NAME/$PROJECT_NAME/g"
 fi
 
 if [ ! -d "api/dist" ]; then
@@ -113,6 +113,6 @@ chmod u+x start-image.sh
 chmod u+x yield-image.sh
 cd ../..
 
-if [ "$PROJECT_NAME" = "grandstack-kit" ] && [ "$NEW_PROJECT_NAME" != "grandstack-kit" ]; then
+if [ "$PREV_PROJECT_NAME" = "grandstack-kit" ] && [ "$PROJECT_NAME" != "grandstack-kit" ]; then
   git init
 fi
