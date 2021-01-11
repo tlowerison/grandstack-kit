@@ -46,7 +46,7 @@ export const session = (app: Express) => {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
       secure: NODE_ENV !== NodeEnv.Development,
-      domain: DOMAIN,
+      domain: NODE_ENV !== NodeEnv.Development ? DOMAIN : undefined,
     },
     resave: false,
     saveUninitialized: false,

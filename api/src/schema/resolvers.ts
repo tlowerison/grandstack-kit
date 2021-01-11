@@ -5,7 +5,7 @@ import { compare, hash } from "bcrypt";
 const SALT_ROUNDS = 10;
 
 const asserRequestorIsServer = (cypherParams: Context["cypherParams"]) => {
-  if (!cypherParams?._credentials?.scopes?.includes("SERVER")) {
+  if (!cypherParams?._credentials?.roles?.includes("SERVER")) {
     throw new AuthorizationError();
   }
 };
