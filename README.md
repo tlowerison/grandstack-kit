@@ -3,7 +3,6 @@ This is a [GRAND Stack](https://grandstack.io/) boilerplate currently in develop
 - [GraphQL](https://graphql.org)
 - [Preact](https://preactjs.com) - a faster, lighter version of React; with [preact/compat](https://preactjs.com/guide/v10/switching-to-preact) your source code still refers to regular old React
 - [Apollo](https://www.apollographql.com)
-- [NodeJS](https://nodejs.org)
 - [TypeScript](https://www.typescriptlang.org) - used in frontend and backends
 - [Neo4j](https://neo4j.com)
 - [@tlowerison/neo4j-graphql-js](https://www.npmjs.com/package/@tlowerison/neo4j-graphql-js) - a fork of neo4j-graphql-js which provides dynamic authorization capabilities
