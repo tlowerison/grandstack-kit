@@ -106,11 +106,11 @@ if [ ! -d "redis-stable" ]; then
   cd ..
 fi
 
-if [ -e "api/.env" ]; then
+if [ ! -e "api/.env" ]; then
   grep "[A-Z_]*=" api/README.md > api/.env
 fi
 
-if [ -e "server/.env" ]; then
+if [ ! -e "server/.env" ]; then
   grep "[A-Z_]*=" server/README.md > server/.env
 fi
 
