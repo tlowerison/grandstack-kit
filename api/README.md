@@ -18,6 +18,6 @@ Also, make sure that the value assigned to `JWT_SECRET` is the same as the one a
 
 Make sure that redis is running, by running in `api`'s parent directory
 ```
-cd redis-stable
+cd ../redis-stable
 redis-server
 ```
