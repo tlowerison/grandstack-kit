@@ -16,7 +16,7 @@ import {
 } from "env";
 import { Neo4jPlugin, buildContext } from "@tlowerison/neo4j-graphql-js";
 import { NodeEnv } from "utils";
-import { rateLimiter } from "./redis";
+import { rateLimiter } from "./rate-limiter";
 import { schema } from "./schema";
 
 if (!IS_GRAPHQL_BUILD) {

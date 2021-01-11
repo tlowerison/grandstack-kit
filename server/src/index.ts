@@ -4,8 +4,9 @@ import helmet from "helmet";
 import { CLIENT_PORT, DOMAIN, GRAPHQL_PATH, NODE_ENV, PORT } from "env";
 import { ApolloServer } from "apollo-server-express";
 import { NodeEnv } from "utils";
+import { rateLimiter } from "./rate-limiter";
 import { schema } from "./schema";
-import { rateLimiter, session } from "./redis";
+import { session } from "./session";
 
 (async () => {
   const app = express();
