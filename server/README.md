@@ -16,3 +16,9 @@ REDIS_PORT=6379
 SESSION_SECRET='a-lot-of-random-letters-and-numbers-here'
 ```
 Also, make sure that the value assigned to `JWT_SECRET` is the same as the one assigned to `JWT_SECRET` in api/.env
+
+Make sure that redis is running, by running in `server`'s parent directory
+```
+cd redis-stable
+redis-server
+```

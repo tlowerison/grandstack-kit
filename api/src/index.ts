@@ -16,6 +16,7 @@ import {
 } from "env";
 import { Neo4jPlugin, buildContext } from "@tlowerison/neo4j-graphql-js";
 import { NodeEnv } from "utils";
+import { rateLimiter } from "./redis";
 import { schema } from "./schema";
 
 if (!IS_GRAPHQL_BUILD) {
@@ -28,6 +29,8 @@ if (!IS_GRAPHQL_BUILD) {
   app.use(helmet({ contentSecurityPolicy: NODE_ENV !== NodeEnv.Development ? undefined : false }));
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+
+  rateLimiter(app);
 
   const apolloServer = new ApolloServer({
     schema,

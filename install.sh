@@ -97,14 +97,12 @@ if [ ! -d "server/dist" ]; then
   cd server && yarn && yarn build && cd ..
 fi
 
-if [ ! -d "server/redis-stable" ]; then
-  cd server
+if [ ! -d "redis-stable" ]; then
   wget http://download.redis.io/redis-stable.tar.gz
   tar xvzf redis-stable.tar.gz
+  rm redis-stable.tar.gz
   cd redis-stable
   make
-  cd ..
-  rm redis-stable.tar.gz
   cd ..
 fi
 

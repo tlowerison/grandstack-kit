@@ -11,6 +11,8 @@ export const {
   NEO4J_USERNAME,
   NODE_ENV,
   PORT,
+  REDIS_HOST,
+  REDIS_PORT,
 } = parseEnv({
   API_KEY_SECRET: "string",
   DOMAIN: "?domain",
@@ -22,4 +24,6 @@ export const {
   NEO4J_PROTOCOL: "string",
   NEO4J_USERNAME: "string",
   PORT: "positiveInt",
+  REDIS_HOST: "string",
+  REDIS_PORT: "positiveInt",
 });

@@ -13,3 +13,9 @@ NODE_ENV=development
 PORT=8080
 ```
 Also, make sure that the value assigned to `JWT_SECRET` is the same as the one assigned to `JWT_SECRET` in server/.env
+
+Make sure that redis is running, by running in `api`'s parent directory
+```
+cd redis-stable
+redis-server
+```

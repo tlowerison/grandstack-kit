@@ -5,7 +5,7 @@ import { CLIENT_PORT, DOMAIN, GRAPHQL_PATH, NODE_ENV, PORT } from "env";
 import { ApolloServer } from "apollo-server-express";
 import { NodeEnv } from "utils";
 import { schema } from "./schema";
-import { session } from "./session";
+import { rateLimiter, session } from "./redis";
 
 (async () => {
   const app = express();
@@ -15,15 +15,16 @@ import { session } from "./session";
   app.use(bodyParser.json());
 
   session(app);
+  rateLimiter(app);
 
   const apolloServer = new ApolloServer({
     context: ({ req }) => ({ req, session: req.session }),
-    schema: await schema(),
     playground: NODE_ENV !== NodeEnv.Development ? false : {
       settings: {
         "request.credentials": "same-origin",
       },
     },
+    schema: await schema(),
     subscriptions: false,
   });
   apolloServer.applyMiddleware({
