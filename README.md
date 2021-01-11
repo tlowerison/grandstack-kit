@@ -42,3 +42,30 @@ Installation includes three separate instances of `yarn && yarn build` so if you
 - https://tixy.land/
 - https://paveldogreat.github.io/WebGL-Fluid-Simulation/
 - https://youtu.be/yY9GAyJtuJ0
+
+### Usage
+Create `.env` files in the `api` and `server` directories according to the READMEs listed there. Then, run all of these commands in separate tabs.
+
+Start Redis
+```
+cd redis-stable
+redis-server
+```
+
+Start API
+```
+cd api
+yarn start
+```
+
+Start Server
+```
+cd api
+yarn start
+```
+
+Start Client
+```
+cd api
+yarn start
+```
