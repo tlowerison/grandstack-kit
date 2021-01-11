@@ -27,7 +27,7 @@ The basic architecture works as follows:
   - API:
     - JWT authorization
     - Direct link to Neo4J database
-    - External facing due to decoupling from server
+    - External facing thanks to decoupling from server
 
 ### Installation
 ```
