@@ -31,8 +31,6 @@ data:
   graphql-path: /graphql
   node-env: production
   port: "4000"
-  redis-host: grandstack-kit-prod-redis.default.svc.cluster.local
-  redis-port: "6379"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -114,13 +112,13 @@ spec:
             - name: REDIS_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: grandstack-kit-prod-server-config
-                  key: redis-host
+                  name: grandstack-kit-prod-redis-config
+                  key: host
             - name: REDIS_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: grandstack-kit-prod-server-config
-                  key: redis-port
+                  name: grandstack-kit-prod-redis-config
+                  key: port
             - name: SESSION_SECRET
               valueFrom:
                 secretKeyRef:

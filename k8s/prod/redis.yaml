@@ -24,8 +24,10 @@ kind: ConfigMap
 metadata:
   name: grandstack-kit-prod-redis-config
 data:
+  host: grandstack-kit-prod-redis.default.svc.cluster.local
   maxmemory: 2mb
   maxmemory-policy: allkeys-lru
+  port: "6379"
 ---
 apiVersion: apps/v1
 kind: Deployment

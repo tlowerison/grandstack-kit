@@ -113,5 +113,15 @@ spec:
                 configMapKeyRef:
                   name: grandstack-kit-prod-api-config
                   key: port
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-redis-config
+                  key: host
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: grandstack-kit-prod-redis-config
+                  key: port
       imagePullSecrets:
         - name: regcred
