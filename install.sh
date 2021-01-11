@@ -3,7 +3,7 @@
 DIR=$(dirname "$BASH_SOURCE")
 cd "$DIR"
 PREV_PROJECT_NAME=$(basename "$PWD")
-DOMAIN_LINE=$(grep "PREV_DOMAIN=" server/README.md)
+DOMAIN_LINE=$(grep "DOMAIN=" server/README.md)
 IFS="=" read -r -a DOMAIN_ARRAY <<< "$DOMAIN_LINE"
 PREV_DOMAIN=${DOMAIN_ARRAY[1]}
 
