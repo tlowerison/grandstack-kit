@@ -41,4 +41,8 @@ E.g.
 ```
 bash grandstack-kit/install.sh grandstack-kit domain.com grandstackkit
 ```
-Installation takes several minutes (three separate `yarn && yarn build`s), go watch some paint dry in the mean time.
+Installation includes three separate instances of `yarn && yarn build` so if you like watching paint dry feel free to watch, otherwise here are some sweet time-burners
+- https://tixy.land/
+- https://paveldogreat.github.io/WebGL-Fluid-Simulation/
+- https://youtu.be/mev2cgRN9Zo
+- https://youtu.be/yY9GAyJtuJ0
