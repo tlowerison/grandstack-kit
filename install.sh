@@ -69,7 +69,7 @@ if [ "$NEW_DOMAIN" != "$DOMAIN" ]; then
 fi
 
 if [ "$NEW_IMAGE_REPO" != "" ]; then
-  grep -R -rl "grandstackkit" k8s/ | LC_ALL=C xargs sed -i "s/grandstackkit/$NEW_IMAGE_REPO/g"
+  grep -R -rl "grandstackkit" k8s/ | LC_ALL=C xargs sed -i "" "s/grandstackkit/$NEW_IMAGE_REPO/g"
 fi
 
 if [ "$NEW_PROJECT_NAME" != "$PROJECT_NAME" ]; then
