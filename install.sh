@@ -58,7 +58,7 @@ while test $# -gt 0; do
 done
 
 if [ "$PROJECT_NAME" = "grandstack-kit" ] && [ "$NEW_PROJECT_NAME" != "grandstack-kit" ]; then
-  mv --backup=t .git ~/.Trash/.git
+  mv -i .git ~/.Trash/.git < /dev/null
 fi
 
 if [ "$NEW_PROJECT_NAME" != "$PROJECT_NAME" ]; then
