@@ -44,5 +44,4 @@ bash grandstack-kit/install.sh -p my-cool-project -d mydomain.com -i myimagerepo
 Installation includes three separate instances of `yarn && yarn build` so if you like watching paint dry feel free to watch, otherwise here are some sweet time-burners
 - https://tixy.land/
 - https://paveldogreat.github.io/WebGL-Fluid-Simulation/
-- https://youtu.be/mev2cgRN9Zo
 - https://youtu.be/yY9GAyJtuJ0
