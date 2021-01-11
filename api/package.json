@@ -15,8 +15,7 @@
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.12.5",
-    "@tlowerison/neo4j-graphql-js": "^1.0.5",
-    "apollo-errors": "^1.9.0",
+    "@tlowerison/neo4j-graphql-js": "^1.0.8",
     "apollo-server-express": "^2.18.1",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",

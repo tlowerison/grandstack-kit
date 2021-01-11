@@ -892,14 +892,6 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime-corejs2@^7.5.5":
-  version "7.12.5"
-  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.12.5.tgz#382ec38f0826365e96118e28b81249c1c61bace3"
-  integrity sha512-kt5YpZ7F5A05LOgQuaMXXmcxakK/qttf5C/E1BJPA3Kf5PanbjPzDoXN+PIslUnjUxpuKblCsXyP0QfMiqyKqA==
-  dependencies:
-    core-js "^2.6.5"
-    regenerator-runtime "^0.13.4"
-
 "@babel/runtime-corejs3@^7.12.1", "@babel/runtime-corejs3@^7.12.5":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.12.5.tgz#ffee91da0eb4c6dae080774e94ba606368e414f4"
@@ -1034,18 +1026,18 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@tlowerison/neo4j-graphql-js@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@tlowerison/neo4j-graphql-js/-/neo4j-graphql-js-1.0.4.tgz#c8255edae6b80f16b91a49fd7d5ceadb9f77aabf"
-  integrity sha512-POtslt1SAvDolyzdHrzJ0HmTY1v8xxROsHXzb0mAMY9eWypL7uYguhVN8AFVayCYKzt9IMG0FrLPGXVUd+mptg==
+"@tlowerison/neo4j-graphql-js@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@tlowerison/neo4j-graphql-js/-/neo4j-graphql-js-1.0.8.tgz#9410c20cc3ff768a0d838de39d5288e07bae715b"
+  integrity sha512-vzXHj1UM19DUgBwVAcA7l5icplmX7HcE41Je/8bSvWRPP/c1ZlbpIGrftcpDO7Q+H6VcaI5MIlHgXKmRi43ldg==
   dependencies:
-    "@babel/runtime" "^7.5.5"
-    "@babel/runtime-corejs2" "^7.5.5"
+    "@babel/runtime-corejs3" "^7.12.5"
     apollo-errors "^1.9.0"
     apollo-server-errors "^2.4.1"
     apollo-server-express "^2.19.0"
-    apollo-server-plugin-base "^0.10.2"
+    callsite "^1.0.0"
     debug "^4.1.1"
+    glob "^7.1.6"
     graphql "^15.3.0"
     graphql-auth-directives "^2.2.1"
     jsonwebtoken "^8.5.1"
@@ -2091,6 +2083,11 @@ call-bind@^1.0.0:
     function-bind "^1.1.1"
     get-intrinsic "^1.0.0"
 
+callsite@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
+  integrity sha1-KAOY5dZkvXQDi28JBRU+borxvCA=
+
 caniuse-lite@^1.0.30001157:
   version "1.0.30001157"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001157.tgz#2d11aaeb239b340bc1aa730eca18a37fdb07a9ab"
@@ -2324,11 +2321,6 @@ core-js-pure@^3.0.0:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.8.2.tgz#286f885c0dac1cdcd6d78397392abc25ddeca225"
   integrity sha512-v6zfIQqL/pzTVAbZvYUozsxNfxcFb6Ks3ZfEbuneJl3FW9Jb8F6vLWB6f+qTmAu72msUdyb84V8d/yBFf7FNnw==
 
-core-js@^2.6.5:
-  version "2.6.12"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
-  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
-
 core-js@^3.0.1, core-js@^3.2.1:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.7.0.tgz#b0a761a02488577afbf97179e4681bf49568520f"
@@ -2380,10 +2372,17 @@ debug@^3.2.6:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.1.0, debug@^4.1.1:
+debug@^4.1.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.2.0.tgz#7f150f93920e94c58f5574c2fd01a3110effe7f1"
   integrity sha512-IX2ncY78vDTjZMFUdmsvIRFY2Cf4FnD0wRs+nQwJU8Lu99/tPFdb0VybiiMTPe3I6rQmwsqQqRBvxU+bZ/I8sg==
+  dependencies:
+    ms "2.1.2"
+
+debug@^4.1.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
+  integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
   dependencies:
     ms "2.1.2"
 

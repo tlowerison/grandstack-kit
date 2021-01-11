@@ -1,51 +1,42 @@
+import { AuthorizationError, Context, neo4jgraphql } from "@tlowerison/neo4j-graphql-js";
+import { GraphQLResolveInfo } from "graphql";
 import { compare, hash } from "bcrypt";
-import { createError } from "apollo-errors";
-import { neo4jgraphql } from "@tlowerison/neo4j-graphql-js";
-
-const AuthorizationError = createError("AuthorizationError", { message: "You are not authorized." });
 
 const SALT_ROUNDS = 10;
 
-const createUser = async (parent: any, params: any, context: any, resolveInfo: any) => neo4jgraphql(
-  parent,
-  { ...params, password: await hash(params.password, SALT_ROUNDS) },
-  context,
-  resolveInfo,
-);
-
-const getMe = async ({ email, getTx, username, uuid }: { email?: string; getTx: any; username?: string; uuid?: string }) => {
-  let result: any;
-  if (uuid) {
-    result = await getTx().run(`MATCH (user:User) WHERE user.uuid = $uuid RETURN user { .* }`, { uuid });
-  } else if (email && username) {
-    result = await getTx().run(`MATCH (user:User) WHERE user.email = $email AND user.username = $username RETURN user { .* }`, { email, username });
-  } else if (email) {
-    result = await getTx().run(`MATCH (user:User) WHERE user.email = $email RETURN user { .* }`, { email });
-  } else if (username) {
-    result = await getTx().run(`MATCH (user:User) WHERE user.username = $username RETURN user { .* }`, { username });
-  } else {
-    return null;
+const asserRequestorIsServer = (cypherParams: Context["cypherParams"]) => {
+  if (!cypherParams?._credentials?.scopes?.includes("SERVER")) {
+    throw new AuthorizationError();
   }
-  return (result.records.length === 1 && result.records[0].get("user")) || null;
 };
+
+const createUser = async (source: any, args: any, context: Context, info: GraphQLResolveInfo) => neo4jgraphql(
+  source,
+  { ...args, password: await hash(args.password, SALT_ROUNDS) },
+  context,
+  info,
+);
 
 export const resolvers = {
   Mutation: {
     CreateUser: createUser,
-    SignIn: async (_parent: any, { password, ...params }: { email: string; password: string; username: string }, { cypherParams, getTx }: any) => {
-      if (!cypherParams?._credentials?.roles?.includes("SERVER")) {
-        throw new AuthorizationError({ message: "Unauthorized: Cannot access Mutation.SignIn" });
+    SignIn: async (_source: any, { password, ...args }: { password: string }, { cypherParams, getMe, query }: Context) => {
+      asserRequestorIsServer(cypherParams);
+      if (cypherParams?._credentials?.uuid) {
+        return await getMe();
       }
-      if (cypherParams?._credentials?.uuid) return await getMe({ getTx, uuid: cypherParams._credentials.uuid });
-      const { password: passwordHash, ...me } = await getMe({ getTx, ...params });
-      if (!me || !await compare(password, passwordHash)) return null;
+      const [{ me }] = await query("MATCH (me:User { email: $email }) RETURN me { .* }", args, ["me"] as const);
+      if (!me || !await compare(password, me.password)) {
+        return null;
+      }
       return { ...me, password: null };
     },
-    SignOut: (_parent: any, _params: any, { cypherParams }: any) => {
-      if (!cypherParams?._credentials?.scopes?.includes("SERVER")) {
-        throw new AuthorizationError({ message: "Unauthorized: Cannot access Mutation.SignIn" });
-      }
+    SignOut: (_source: any, _args: any, { cypherParams }: Context) => {
+      asserRequestorIsServer(cypherParams);
     },
-    SignUp: createUser,
+    SignUp: (source: any, args: any, context: Context, info: GraphQLResolveInfo) => {
+      asserRequestorIsServer(context.cypherParams);
+      return createUser(source, args, context, info);
+    },
   },
 };
