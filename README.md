@@ -44,7 +44,7 @@ Installation includes three separate instances of `yarn && yarn build` so if you
 - https://youtu.be/yY9GAyJtuJ0
 
 ### Usage
-Create `.env` files in the `api` and `server` directories according to the READMEs listed there. Then, run all of these commands in separate tabs.
+Run all of these commands in separate tabs
 
 Start Redis
 ```
