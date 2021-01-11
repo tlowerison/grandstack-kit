@@ -61,6 +61,12 @@ if [ "$PROJECT_NAME" = "grandstack-kit" ] && [ "$NEW_PROJECT_NAME" != "grandstac
   mv .git ~/.Trash/.git
 fi
 
+if [ "$NEW_PROJECT_NAME" != "$PROJECT_NAME" ]; then
+  cd ..
+  mv {$PROJECT_NAME,$NEW_PROJECT_NAME}
+  cd "$NEW_PROJECT_NAME"
+fi
+
 if [ "$NEW_DOMAIN" != "$DOMAIN" ]; then
   grep -R --exclude-dir=node_modules -rl "$DOMAIN" api/ | LC_ALL=C xargs sed -i "" "s/$DOMAIN/$NEW_DOMAIN/g"
   grep -R --exclude-dir=node_modules -rl "$DOMAIN" client/ | LC_ALL=C xargs sed -i "" "s/$DOMAIN/$NEW_DOMAIN/g"
@@ -108,11 +114,6 @@ chmod u+x publish-image.sh
 chmod u+x start-image.sh
 chmod u+x yield-image.sh
 cd ../..
-
-if [ "$NEW_PROJECT_NAME" != "$PROJECT_NAME" ]; then
-  mv {$PROJECT_NAME,$NEW_PROJECT_NAME}
-  cd "$NEW_PROJECT_NAME"
-fi
 
 if [ "$PROJECT_NAME" = "grandstack-kit" ] && [ "$NEW_PROJECT_NAME" != "grandstack-kit" ]; then
   git init

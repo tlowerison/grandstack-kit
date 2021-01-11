@@ -41,7 +41,7 @@ export const session = (app: Express) => {
     app.set("trust proxy", 1);
   }
   app.use(expressSession({
-    name: "grandstack-kit",
+    name: "grandstack-kit-session",
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
