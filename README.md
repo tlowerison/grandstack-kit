@@ -11,12 +11,10 @@ This is a [GRAND Stack](https://grandstack.io/) boilerplate currently in develop
 - [Kubernetes](https://kubernetes.io)
 - [nginx](https://www.nginx.com)
 - (optional) [cygoose](https://github.com/tlowerison/cygoose/) - a Neo4j database migration tool
-- a Kubernetes cluster
-- a private Docker image repository
+- a Kubernetes cluster + a private Docker image repository
+  - _If you're just starting out with Kubernetes/Docker, I suggest checking out Digital Ocean for this bullet point since they have a lot of great, in-depth walkthroughs and also just generally have a nice UX._
 
-If you're just starting out with Kubernetes/Docker, I suggest checking out Digital Ocean for the last two bullet points since they have a lot of great, in-depth walkthroughs and also just generally have a nice UX.
-
-The basic architecture works as follows:
+Here's the basic layout of this project:
 - Kubernetes/nginx routes traffic to different services based on path
   - (Prefix): domain.com/ -> client
   - (Exact): domain.com/graphql -> server
