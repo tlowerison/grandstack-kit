@@ -1,0 +1,23 @@
+mutation DeleteMe {
+  DeleteMe
+}
+
+mutation SignIn($email: String, $username: String $password: String!) {
+  SignIn(email: $email, username: $username, password: $password) {
+    ...miniUserFields
+  }
+}
+
+mutation SignOut {
+  SignOut
+}
+
+mutation SignUp($email: String!, $password: String!, $username: String!) {
+  SignUp(email: $email, password: $password, username: $username) {
+    ...miniUserFields
+  }
+}
+
+mutation UpdateMe($email: String, $username: String, $description: String) {
+  UpdateMe(email: $email, username: $username, description: $description)
+}

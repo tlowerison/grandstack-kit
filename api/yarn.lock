@@ -1026,10 +1026,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@tlowerison/neo4j-graphql-js@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@tlowerison/neo4j-graphql-js/-/neo4j-graphql-js-1.0.8.tgz#9410c20cc3ff768a0d838de39d5288e07bae715b"
-  integrity sha512-vzXHj1UM19DUgBwVAcA7l5icplmX7HcE41Je/8bSvWRPP/c1ZlbpIGrftcpDO7Q+H6VcaI5MIlHgXKmRi43ldg==
+"@tlowerison/neo4j-graphql-js@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@tlowerison/neo4j-graphql-js/-/neo4j-graphql-js-1.1.0.tgz#6d15d81c0c678fec03166476ef511aa6ecab8625"
+  integrity sha512-jbdh9jh7cWOPm/hKfZwHJ/YDFrp4zWrXRzZwACJk69odx8vacemT5y2ydlFV1DakegQYQONfZTgmr5rn21DJ4g==
   dependencies:
     "@babel/runtime-corejs3" "^7.12.5"
     apollo-errors "^1.9.0"

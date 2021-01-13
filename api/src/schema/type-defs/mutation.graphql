@@ -1,17 +1,19 @@
 type Mutation {
+  # Implement email verification down the line
   CreateUser(email: String!, password: String!, username: String!, roles: [Role!]!): User
     @admin
     @email
     @username
-    @password
-    @uniqueEmailUsername
+    @uniqueEmail(this: "NULL")
+    @uniqueUsername(this: "NULL")
     @cypher(statement: """
       CREATE (user:User {
         uuid: apoc.create.uuid(),
         email: $email,
+        username: $username,
         password: $password,
-        roles: $roles,
-        username: $username
+        roles: $roles
+        description: ''
       })
       RETURN user
     """)
@@ -29,32 +31,51 @@ type Mutation {
   SignOut: Boolean
     @server
 
+  # Implement email verification down the line
   SignUp(email: String!, username: String!, password: String!): User
     @server
     @email
     @username
-    @password
-    @uniqueEmailUsername
+    @uniqueEmail(this: "NULL")
+    @uniqueUsername(this: "NULL")
     @cypher(statement: """
       CREATE (user:User {
         uuid: apoc.create.uuid(),
         email: $email,
+        username: $username,
         password: $password,
         roles: ['USER'],
-        username: $username
+        description: ''
       })
       RETURN user
     """)
 
-  UpdateMe(username: String, email: String): Boolean
+  # Implement email verification down the line
+  UpdateMe(email: String, username: String, description: String): Boolean
     @user
     @writeMe
     @email
     @username
-    @uniqueEmailUsername
+    @uniqueEmail(this: "me")
+    @uniqueUsername(this: "me")
     @cypher(statement: """
       SET me.username = CASE WHEN $username IS NOT NULL THEN $username ELSE me.username END
       SET me.email = CASE WHEN $email IS NOT NULL THEN $email ELSE me.email END
+      SET me.description = CASE WHEN $description IS NOT NULL THEN $description ELSE me.description END
+      RETURN TRUE
+    """)
+
+  # Implement email verification down the line
+  UpdateUser(userUUID: ID!, email: String, username: String, description: String): Boolean
+    @env(provides: "MATCH (user:User { uuid: $userUUID })")
+    @admin
+    @email
+    @uniqueEmail(this: "user")
+    @uniqueUsername(this: "user")
+    @cypher(statement: """
+      SET user.username = CASE WHEN $username IS NOT NULL THEN $username ELSE user.username END
+      SET user.email = CASE WHEN $email IS NOT NULL THEN $email ELSE user.email END
+      SET user.description = CASE WHEN $description IS NOT NULL THEN $description ELSE user.description END
       RETURN TRUE
     """)
 }

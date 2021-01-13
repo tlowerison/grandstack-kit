@@ -9,9 +9,12 @@ enum Scope {
   DELETE_ME
 }
 
-type User @user {
+type User @shield(expression: "me IS NOT NULL") {
   uuid: ID! @id
   email: String @me
   username: String!
   password: String @admin
+  roles: [Role] @admin
+  description: String
+  friends: [User] @relation(direction: "OUT", name: "KNOWS") @filter(expression: "item = me OR (me)-[:KNOWS]->(item)")
 }

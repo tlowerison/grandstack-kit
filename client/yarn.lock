@@ -1473,6 +1473,13 @@
     react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
+"@material-ui/icons@^4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz#b3a7353266519cd743b6461ae9fdfcb1b25eb4c5"
+  integrity sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+
 "@material-ui/styles@^4.11.2":
   version "4.11.2"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.11.2.tgz#e70558be3f41719e8c0d63c7a3c9ae163fdc84cb"
@@ -1653,6 +1660,17 @@
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-7.2.1.tgz#2ad4e844175a3738cb9e7064be5ea070b8863a1c"
   integrity sha512-oZ0Ib5I4Z2pUEcoo95cT1cr6slco9WY7yiPpG+RGNkj8YcYgJnM7pXmYmorNOReh8MIGcKSqXyeGjxnr8YiZbA==
+
+"@tlowerison/common-components@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@tlowerison/common-components/-/common-components-1.0.9.tgz#cf36bca09c174b16c2352db6b3495198cf81d01c"
+  integrity sha512-T+qcWetw2XFoDYqUCK97oYSGHbsP/y4xMs1Mf9REyi39t4dbrrYY0zL/0Pnt4IEz3/Qvh5hjqmTqIqRVk0Y/Eg==
+  dependencies:
+    "@material-ui/core" "^4.11.2"
+    "@material-ui/icons" "^4.11.2"
+    ramda "^0.27.1"
+    react-router "^5.2.0"
+    react-router-dom "^5.2.0"
 
 "@tootallnate/once@1":
   version "1.1.2"

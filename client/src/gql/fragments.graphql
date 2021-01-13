@@ -1,0 +1,12 @@
+fragment miniUserFields on User {
+  __typename
+  uuid
+  username
+}
+
+fragment userFields on User {
+  __typename
+  uuid
+  username
+  description
+}

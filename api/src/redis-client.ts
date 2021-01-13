@@ -1,5 +1,5 @@
 import redis from "redis";
-import { REDIS_HOST, REDIS_PORT } from "env";
+import { IS_GRAPHQL_BUILD, REDIS_HOST, REDIS_PORT } from "env";
 
 const maxRetryAttempts = 1000;
 const maxRetryTimeInMs = 1000 * 60 * 60;
@@ -22,7 +22,7 @@ const retry_strategy = ({ attempt, error, total_retry_time }) => {
   return Math.min(attempt * 100, retryWaitTimeInMs);
 };
 
-export const redisClient = redis.createClient(
+export const redisClient = IS_GRAPHQL_BUILD ? null : redis.createClient(
   REDIS_PORT,
   REDIS_HOST,
   {
@@ -31,4 +31,4 @@ export const redisClient = redis.createClient(
   },
 );
 
-redisClient.on("connect", () => console.log("Connected to Redis"));
+redisClient?.on("connect", () => console.log("Connected to Redis"));

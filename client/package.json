@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -rf dist; tsc && NODE_ENV=production yarn webpack",
     "build:profile": "rm -rf dist; NODE_ENV=production PROFILE=true yarn webpack",
+    "build+gqlgen": "cd ../api && yarn build:graphql && cd ../client && yarn gqlgen",
     "gqlgen": "graphql-codegen --config codegen.yaml && eslint --ext .ts --ext .tsx src/generated/graphql.tsx --fix",
     "lint": "eslint --ext .ts --ext .tsx src --fix",
     "prepack": "yarn build",
@@ -18,6 +19,8 @@
     "@apollo/client": "^3.2.7",
     "@apollo/react-hooks": "^4.0.0",
     "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@tlowerison/common-components": "^1.0.9",
     "cross-fetch": "^3.0.6",
     "graphql": "^15.3.0",
     "preact": "^10.5.9",

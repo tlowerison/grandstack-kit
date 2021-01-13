@@ -1,0 +1,17 @@
+query Me {
+  Me {
+    ...userFields
+  }
+}
+
+query MiniMe {
+  Me {
+    ...miniUserFields
+  }
+}
+
+query User($uuid: ID!) {
+  User(uuid: $uuid) {
+    ...userFields
+  }
+}
